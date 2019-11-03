@@ -1,0 +1,58 @@
+.nav-header {
+    background: #d4d4d4;
+}
+
+.logo {
+    width: 25%;
+}
+
+.nav-link {
+    color: dimgray !important;
+    text-transform: uppercase;
+    font-size: 0.75em;
+}
+
+.nav-link:active {
+    color: red !important;
+}
+
+
+.nav-link:hover {
+    color: #ff0000 !important;
+}
+
+ .carousel-item {
+    height: 65vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    transition: transform .5s ease-in-out,-webkit-transform .5s ease-in-out,-o-transform .5s ease-in-out;
+  }
+
+  .carousel-item img {
+      width: 100%;
+  }
+
+  .history {
+      background: #1b3c33;
+  }
+
+  .history-content{
+      font-size: 1rem;
+  }
+
+  .page-footer {
+      background: #C1C0C0;
+  }
+
+  .link-logo {
+      width: 100%;
+      text-align: center;
+  }
+
+  .footer-logo {
+      width: 10%;
+  }
