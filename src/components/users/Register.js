@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import axios from 'axios'
+import Popup from "reactjs-popup"
 
 class Register extends Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class Register extends Component {
             // username: '',
             // jobType: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            popupRegister: false,
+            popupContent: ''
         }
     }
 
@@ -57,11 +60,34 @@ class Register extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        console.log(account)
-        axios.post('http://localhost:5000/accounts/register/', account)
-            .then(res => console.log(res.data))
-        window.location = '/';
-
+        axios.post('http://localhost:5000/users/register/', account)
+            .then(res => {
+                if (res.data && res.data.message) {
+                    this.setState({
+                        popupRegister: true,
+                        popupContent: res.data.message
+                    })
+                    setTimeout(() => {
+                        this.setState({
+                            popupRegister: false
+                        })
+                    }, 1500);
+                } else {
+                    this.setState({
+                        popupRegister: true,
+                        popupContent: 'Register successfully!'
+                    })
+                    setTimeout(() => {
+                        this.setState({
+                            popupRegister: false
+                        })
+                        window.location = '/'
+                    }, 1000);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     render() {
@@ -82,6 +108,16 @@ class Register extends Component {
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
+                                </div>
+                                <input
+                                    name=""
+                                    className="form-control"
+                                    placeholder="User name" type="text"
+                                    onChange={this.handleUserNameChange} />
+                            </div>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-id-card"></i> </span>
                                 </div>
                                 <input
                                     name=""
@@ -154,6 +190,12 @@ class Register extends Component {
                         </form>
                     </article>
                 </div>
+                <Popup
+                    contentStyle={{ padding: '1%', fontWeight: 500, textAlign: 'center' }}
+                    open={this.state.popupRegister}
+                    position='center center'>
+                    <div>{this.state.popupContent}</div>
+                </Popup>
             </div>
         );
     }

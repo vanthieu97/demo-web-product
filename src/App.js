@@ -15,7 +15,7 @@ function App() {
         <Route path='/coffee-admin'>
           <Route path='/' component={CoffeeAdmin} />
         </Route>
-        <Route path='/Register' component={Register} />
+        <Route path='/register' component={Register} />
         {/* <Route path='/cart' component={Cart} />
         <Route component={Default} /> */}
       </Switch>

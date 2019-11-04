@@ -3,7 +3,7 @@ import Home from './Home'
 import Slider from './Slider'
 import Footer from './Footer'
 import Header from './Header'
-import Register from './account/Register'
+import Register from './users/Register'
 
 export {
     Header,
