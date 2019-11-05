@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import axios from 'axios'
 import Popup from "reactjs-popup"
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import { Header, Navbar, Footer } from '..'
 
+// facebook: https://developers.facebook.com/apps
+// google: https://console.developers.google.com/apis/credentials
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +19,6 @@ class Register extends Component {
             // username: '',
             // jobType: '',
             password: '',
-            confirmPassword: '',
             popupRegister: false,
             popupContent: ''
         }
@@ -34,8 +37,13 @@ class Register extends Component {
     }
 
     handlePhoneNumberChange = event => {
+        let areaCode = document.getElementById('area-code')
+        let value = event.target.value
+        while (value[0] == '0') {
+            value = value.substring(1, value.length)
+        }
         this.setState({
-            phoneNumber: event.target.value
+            phoneNumber: areaCode.value + value
         })
     }
 
@@ -49,6 +57,16 @@ class Register extends Component {
         this.setState({
             password: event.target.value
         })
+    }
+
+    handleComparePassword = _ => {
+        let password = document.getElementById('password')
+        let confirmPassword = document.getElementById('confirm-password')
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity("Password don't match")
+        } else {
+            confirmPassword.setCustomValidity("")
+        }
     }
 
     handleRegisterAccount = event => {
@@ -90,16 +108,44 @@ class Register extends Component {
             })
     }
 
+    responseFacebook(response) {
+        console.log(response)
+    }
+
+    responseGoogle(response) {
+        // console.log(response);
+    }
+
     render() {
         return (
             <div>
-                <div className="card bg-light">
+                <Header />
+                <Navbar />
+                <div className="card bg-light" style={{marginBottom: '10vh'}}>
                     <article className="card-body mx-auto" style={{ maxWidth: 400 }}>
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
                         <p className="text-center">Get started with your free account</p>
                         <p>
-                            <a href="" className="btn btn-block btn-gmail"> <i className="fab fa-google"></i>   Login via Gmail</a>
-                            <a href="" className="btn btn-block btn-facebook"> <i className="fab fa-facebook-f"></i>   Login via Facebook</a>
+                            <GoogleLogin
+                                clientId="AIzaSyCazUJ_yVyeasDYcM1l0pOJj_Y0nT7p_Rg" //CLIENTID NOT CREATED YET
+                                autoLoad={false}
+                                render={_ => {
+                                    return <a href="" className="btn btn-block btn-gmail"> <i className="fab fa-google"></i>   Sign In with Google</a>
+                                }}
+                                style={''}
+                                onSuccess={this.responseGoogle}
+                                onFailure={this.responseGoogle}
+                            />
+
+                            <FacebookLogin
+                                appId="721546181655823"
+                                autoLoad={false}
+                                fields="name,email,picture"
+                                callback={this.responseFacebook}
+                                cssClass="btn btn-block btn-facebook"
+                                icon={<i className="fab fa-facebook-f"></i>}
+                                textButton="&nbsp;&nbsp;Sign In with Facebook"
+                            />
                         </p>
                         <p className="divider-text">
                             <span className="bg-light">OR</span>
@@ -140,11 +186,11 @@ class Register extends Component {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-phone"></i> </span>
                                 </div>
-                                <select className="custom-select" style={{ maxWidth: 120 }}>
-                                    <option value="0">+84</option>
-                                    <option value="1">+972</option>
-                                    <option value="2">+198</option>
-                                    <option value="3">+701</option>
+                                <select className="custom-select" id='area-code' style={{ maxWidth: 120 }}>
+                                    <option value="+84">+84</option>
+                                    {/* <option value="+972">+972</option>
+                                    <option value="+198">+198</option>
+                                    <option value="+701">+701</option> */}
                                 </select>
                                 <input
                                     name=""
@@ -172,6 +218,8 @@ class Register extends Component {
                                     className="form-control"
                                     placeholder="Create password"
                                     type="password"
+                                    id='password'
+                                    onInput={this.handleComparePassword}
                                     onChange={this.handlePasswordChange} />
                             </div>
                             <div className="form-group input-group">
@@ -179,9 +227,11 @@ class Register extends Component {
                                     <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                                 </div>
                                 <input
+                                    id='confirm-password'
                                     className="form-control"
                                     placeholder="Repeat password"
-                                    type="password" />
+                                    type="password"
+                                    onInput={this.handleComparePassword} />
                             </div>
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
@@ -196,6 +246,7 @@ class Register extends Component {
                     position='center center'>
                     <div>{this.state.popupContent}</div>
                 </Popup>
+                <Footer />
             </div>
         );
     }
