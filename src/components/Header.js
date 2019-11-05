@@ -12,7 +12,7 @@ class Header extends Component {
                         left content
                     </div>
                     <div className='col-md-4 text-right px-0'>
-                        <Link to="/">
+                        <Link to="/login">
                             <button type="button" className="btn btn-success">Login</button>
                         </Link>
                         <Link to="/register" >

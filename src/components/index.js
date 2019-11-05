@@ -4,6 +4,7 @@ import Slider from './Slider'
 import Footer from './Footer'
 import Header from './Header'
 import Register from './users/Register'
+import Login from './users/Login'
 
 export {
     Header,
@@ -11,5 +12,6 @@ export {
     Home,
     Slider,
     Footer,
-    Register
+    Register,
+    Login
 }
