@@ -11,8 +11,13 @@ import { Header, Navbar, Footer } from '..'
 class Login extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            username: '',
+            password: '',
+            popupLogin: false,
+            popupContent: ''
+        }
     }
-
 
     handleClickSignUp() {
         window.location = '/register'
@@ -33,11 +38,67 @@ class Login extends Component {
     }
 
     responseFacebook(response) {
-        console.log(response)
+        // console.log(response)
     }
 
     responseGoogle(response) {
         // console.log(response);
+    }
+
+    handleUsernameChange = event => {
+        this.setState({
+            username: event.target.value
+        })
+    }
+
+    handlePasswordChange = event => {
+        this.setState({
+            password: event.target.value
+        })
+    }
+
+    handleLogin = event => {
+        event.preventDefault()
+        const { username, password } = this.state
+        let account = {
+            username: username,
+            password: password
+        }
+        axios.post('http://localhost:5000/users/authenticate/', account)
+            .then(res => {
+                if (res.data) {
+                    if (res.data.error) {
+                        this.setState({
+                            popupLogin: true,
+                            popupContent: res.data.error
+                        })
+                        setTimeout(() => {
+                            this.setState({
+                                popupLogin: false
+                            })
+                        }, 1500);
+                    } else {
+                        this.setState({
+                            popupLogin: true,
+                            popupContent: 'Login successfully!'
+                        })
+                        let account = res.data
+
+                        localStorage.setItem('username', account.username)
+                        localStorage.setItem('fullName', account.fullName)
+
+                        setTimeout(() => {
+                            this.setState({
+                                popupLogin: false
+                            })
+                            window.location = '/'
+                        }, 1000);
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     render() {
@@ -46,7 +107,7 @@ class Login extends Component {
                 <Header />
                 <Navbar />
                 <div className='card bg-light' id="logreg-forms">
-                    <form className="form-signin">
+                    <form className="form-signin" onSubmit={this.handleLogin}>
                         <h1 className="h3 mb-3 font-weight-normal" style={{ textAlign: 'center' }} > Sign in</h1>
                         {/* <div className="social-login">
                             <button className="btn facebook-btn social-btn" type="button"><span><i className="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
@@ -75,9 +136,22 @@ class Login extends Component {
                             />
                         </p>
                         <p style={{ textAlign: 'center' }}> OR  </p>
-                        <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" />
-                        <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" />
-
+                        <input
+                            type="text"
+                            id="inputUsername"
+                            className="form-control"
+                            placeholder="User name"
+                            required
+                            onChange={this.handleUsernameChange}
+                        />
+                        <input
+                            type="password"
+                            id="inputPassword"
+                            className="form-control"
+                            placeholder="Password"
+                            required
+                            onChange={this.handlePasswordChange}
+                        />
                         <button className="btn btn-success btn-block" type="submit"><i className="fas fa-sign-in-alt"></i> Sign in</button>
                         <a href="#" id="forgot_pswd" onClick={this.handleClickReset}>Forgot password?</a>
                         <hr />
@@ -91,6 +165,12 @@ class Login extends Component {
                         <a href="#" id="cancel_reset" onClick={this.handleClickBack}><i className="fas fa-angle-left"></i> Back</a>
                     </form>
                 </div>
+                <Popup
+                    contentStyle={{ padding: '1%', fontWeight: 500, textAlign: 'center' }}
+                    open={this.state.popupLogin}
+                    position='center center'>
+                    <div>{this.state.popupContent}</div>
+                </Popup>
                 <Footer />
             </div>
         )

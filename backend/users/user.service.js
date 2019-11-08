@@ -22,6 +22,8 @@ async function authenticate({ username, password }) {
             ...userWithoutHash,
             token
         };
+    }else{
+        throw `Username or password is incorrect`;
     }
 }
 

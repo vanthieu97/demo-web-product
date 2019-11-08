@@ -56,3 +56,19 @@
   .footer-logo {
       width: 10%;
   }
+
+  .logout {
+    padding: 0 0 0 3px;
+    cursor: pointer;
+
+}
+.logout:hover {
+    color: #ff0000 !important;
+}
+
+.username {
+    display: flex;
+    align-items: center;
+    color: #ffff00;
+    justify-content: flex-end;
+}

@@ -80,27 +80,34 @@ class Register extends Component {
         }
         axios.post('http://localhost:5000/users/register/', account)
             .then(res => {
-                if (res.data && res.data.message) {
-                    this.setState({
-                        popupRegister: true,
-                        popupContent: res.data.message
-                    })
-                    setTimeout(() => {
+                if (res.data) {
+                    if (res.data.error) {
                         this.setState({
-                            popupRegister: false
+                            popupRegister: true,
+                            popupContent: res.data.error
                         })
-                    }, 1500);
-                } else {
-                    this.setState({
-                        popupRegister: true,
-                        popupContent: 'Register successfully!'
-                    })
-                    setTimeout(() => {
+                        setTimeout(() => {
+                            this.setState({
+                                popupRegister: false
+                            })
+                        }, 1500);
+                    } else {
                         this.setState({
-                            popupRegister: false
+                            popupRegister: true,
+                            popupContent: 'Register successfully!'
                         })
-                        window.location = '/'
-                    }, 1000);
+                        let account = res.data
+
+                        localStorage.setItem('username', account.username)
+                        localStorage.setItem('fullName', account.fullName)
+
+                        setTimeout(() => {
+                            this.setState({
+                                popupRegister: false
+                            })
+                            window.location = '/'
+                        }, 1000);
+                    }
                 }
             })
             .catch(err => {
@@ -121,7 +128,7 @@ class Register extends Component {
             <div>
                 <Header />
                 <Navbar />
-                <div className="card bg-light" style={{marginBottom: '10vh'}}>
+                <div className="card bg-light" style={{ marginBottom: '10vh' }}>
                     <article className="card-body mx-auto" style={{ maxWidth: 400 }}>
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
                         <p className="text-center">Get started with your free account</p>

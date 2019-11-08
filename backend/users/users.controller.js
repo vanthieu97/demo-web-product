@@ -16,13 +16,13 @@ module.exports = router;
 function authenticate(req, res, next) {
     userService.authenticate(req.body)
         .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
-        .catch(err => next(err));
+        .catch(err => res.json({ error: err }))
 }
 
 function register(req, res, next) {
     userService.create(req.body)
-        .then(() => res.json({}))
-        .catch(err => res.json({ message: err }))
+        .then(() => res.json(req.body))
+        .catch(err => res.json({ error: err }))
 }
 
 function getAll(req, res, next) {
