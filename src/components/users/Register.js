@@ -78,7 +78,7 @@ class Register extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        axios.post('http://localhost:5000/users/register/', account)
+        axios.post(process.env.REACT_APP_PUBLIC_URL + 'users/register', account)
             .then(res => {
                 if (res.data) {
                     if (res.data.error) {

@@ -16,12 +16,11 @@
     color: red !important;
 }
 
-
 .nav-link:hover {
     color: #ff0000 !important;
 }
 
- .carousel-item {
+.carousel-item {
     height: 65vh;
     min-height: 350px;
     background: no-repeat center center scroll;
@@ -29,39 +28,39 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    transition: transform .5s ease-in-out,-webkit-transform .5s ease-in-out,-o-transform .5s ease-in-out;
-  }
+    transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out, -o-transform .5s ease-in-out;
+}
 
-  .carousel-item img {
-      width: 100%;
-  }
+.carousel-item img {
+    width: 100%;
+}
 
-  .history {
-      background: #1b3c33;
-  }
+.history {
+    background: #1b3c33;
+}
 
-  .history-content{
-      font-size: 1rem;
-  }
+.history-content {
+    font-size: 1rem;
+}
 
-  .page-footer {
-      background: #C1C0C0;
-  }
+.page-footer {
+    background: #C1C0C0;
+}
 
-  .link-logo {
-      width: 100%;
-      text-align: center;
-  }
+.link-logo {
+    width: 100%;
+    text-align: center;
+}
 
-  .footer-logo {
-      width: 10%;
-  }
+.footer-logo {
+    width: 10%;
+}
 
-  .logout {
+.logout {
     padding: 0 0 0 3px;
     cursor: pointer;
-
 }
+
 .logout:hover {
     color: #ff0000 !important;
 }
@@ -71,4 +70,80 @@
     align-items: center;
     color: #ffff00;
     justify-content: flex-end;
+}
+
+
+/* product */
+
+.card {
+    border-color: transparent;
+    transition: all 1s linear;
+}
+
+.card-footer {
+    background: transparent;
+    border-top: transparent;
+}
+
+.card:hover {
+    border: 0.04rem solid rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.card-footer:hover {
+    background: grba(247, 247, 247);
+}
+
+.img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-top {
+    transition: all 1s linear;
+}
+
+.img-container :hover .card-img-top {
+    transform: scale(1.0);
+}
+
+.cart-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.2rem 0.4rem;
+    background: var(--lightBlue);
+    border: none;
+    color: var(--mainWhite);
+    font-size: 1.4rem;
+    border-radius: 0.5rem 0 0 0;
+    transform: translate(100%, 100%);
+    transition: all 200ms linear;
+}
+
+.img-container:hover .cart-btn {
+    transform: translate(0, 0);
+}
+
+.cart-btn:hover {
+    color: var(--mainBlue);
+    cursor: pointer;
+}
+
+.cart-btn:active {
+    color: var(--mainYellow);
+}
+
+.shopping-cart {
+    color: var(--mainWhite);
+    background: var(--lightBlue);
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.shopping-cart:hover {
+    background: var(--mainBlue);
 }

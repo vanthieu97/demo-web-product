@@ -5,6 +5,8 @@ import Footer from './Footer'
 import Header from './Header'
 import Register from './users/Register'
 import Login from './users/Login'
+import Products from './Products'
+import Product from './Product'
 
 export {
     Header,
@@ -13,5 +15,7 @@ export {
     Slider,
     Footer,
     Register,
-    Login
+    Login,
+    Products,
+    Product
 }

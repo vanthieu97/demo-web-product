@@ -6,7 +6,6 @@ import './index.css'
 // import { Button } from '.'
 
 class Navbar extends Component {
-
     render() {
         return (
             <nav className='navbar navbar-expand-sm navbar-dark bg-white px-sm-5 shadow-sm static-top'>
@@ -20,27 +19,27 @@ class Navbar extends Component {
                             <ul className='navbar-nav align-items-bottom'>
                                 <li className='nav-item ml-3'>
                                     <Link to='/' className='nav-link'>
-                                        Home
+                                        trang chủ
                                     </Link>
                                 </li>
                                 <li className='nav-item ml-3'>
                                     <Link to='/' className='nav-link'>
-                                        Introduce
+                                        giới thiệu
+                                    </Link>
+                                </li>
+                                <li className='nav-item ml-3'>
+                                    <Link to='/products' className='nav-link'>
+                                        sản phẩm
                                     </Link>
                                 </li>
                                 <li className='nav-item ml-3'>
                                     <Link to='/' className='nav-link'>
-                                        Products
+                                        sứ mệnh
                                     </Link>
                                 </li>
                                 <li className='nav-item ml-3'>
                                     <Link to='/' className='nav-link'>
-                                        Mission
-                                    </Link>
-                                </li>
-                                <li className='nav-item ml-3'>
-                                    <Link to='/' className='nav-link'>
-                                        Contact
+                                        liên hệ
                                     </Link>
                                 </li>
                             </ul>
@@ -69,6 +68,9 @@ class Navbar extends Component {
           </Button>
                 </Link> */}
                 </div>
+                <button className='shopping-cart'>
+                    <i className="fas fa-shopping-cart" />
+                </button>
             </nav>
         );
     }

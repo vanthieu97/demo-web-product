@@ -10,6 +10,7 @@ class Header extends Component {
         localStorage.setItem('fullName', '')
         window.location = '/'
     }
+
     render() {
         let fullName = localStorage.getItem('fullName')
 
