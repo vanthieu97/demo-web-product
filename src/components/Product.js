@@ -24,11 +24,12 @@ class Product extends Component {
                         value.handleAddToCart(id)
                         value.handleOpenModal(id)
                       }}>
-                      {
+                      {/* {
                         inCart
                           ? <p className='text-capitalize mb-0' disabled>{' '}in inCart</p>
                           : <i className='fas fa-cart-plus' />
-                      }
+                      } */}
+                      <i className='fas fa-cart-plus' />
                     </button>
                   </div>
                 )

@@ -7,6 +7,7 @@ import Register from './users/Register'
 import Login from './users/Login'
 import Products from './Products'
 import Product from './Product'
+import Modal from './Modal'
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     Register,
     Login,
     Products,
-    Product
+    Product,
+    Modal
 }

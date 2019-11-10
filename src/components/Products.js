@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Navbar, Footer } from '.'
 import { ProductConsumer } from '../context'
-import {Product } from '.'
+import { Product, Modal } from '.'
 
 class Products extends Component {
     render() {
@@ -23,7 +23,7 @@ class Products extends Component {
                         </ProductConsumer>
                     </div>
                 </div>
-
+                <Modal />
                 <Footer />
             </div>
         );
