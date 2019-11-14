@@ -4,62 +4,68 @@ import PropTypes from 'prop-types'
 import { ProductConsumer } from '../context'
 
 class Product extends Component {
-  render() {
-    const { id, title, img, price, inCart } = this.props.product
-    return (
-      <div className='col-9 mx-auto col-md-6 col-lg-4 my-3'>
-        <div className='card'>
-          <ProductConsumer>
-            {
-              value => {
-                return (
-                  <div className='img-container p-5' onClick={() => value.handleDetail(id)}>
-                    <Link to='/detail'>
-                      <img src={img} alt='product' className='card-img-top' />
-                    </Link>
-                    <button
-                      className='cart-btn'
-                      disabled={inCart}
-                      onClick={() => {
-                        value.handleAddToCart(id)
-                        value.handleOpenModal(id)
-                      }}>
-                      {/* {
-                        inCart
-                          ? <p className='text-capitalize mb-0' disabled>{' '}in inCart</p>
-                          : <i className='fas fa-cart-plus' />
-                      } */}
-                      <i className='fas fa-cart-plus' />
-                    </button>
-                  </div>
-                )
-              }
-            }
-          </ProductConsumer>
-          <div className='card-footer font-weight-bold'>
-            <p className='align-self-center mb-0'>
-              {title}
-            </p>
-            <h5 className='text-blue font-italic mb-0'>
-              {price}
-              <span className='mr-1'>đ</span>
+    render() {
+        const { id, title, img, price, inCart, info } = this.props.product
+        return (
+            <ProductConsumer>
+                {
+                    value => {
+                        return (
+                            <div className='mx-auto col-md-6 col-lg-4 my-3'>
+                                <div className='card'>
+                                    <div className='img-container position-relative' onClick={() => value.handleDetail(id)}>
+                                        <Link to='/detail'>
+                                            <img
+                                                src={img}
+                                                alt='product'
+                                                className='card-img-top' />
+                                        </Link>
+                                        <p id={`discribe-${id}`} className='product-info'>{info.slice(0, 150)}...
+                                        <Link to='/detail'><span className=''>đọc tiếp</span></Link></p>
+                                    </div>
+                                    <div className='card-footer'>
+                                        <div className='d-flex justify-content-between'>
+                                            <p className='align-self-center mb-0'>
+                                                {title}
+                                            </p>
+                                            <p className='text-danger align-self-center mb-0'>
+                                                {price}đ</p>
+                                        </div>
+                                        {
+                                            inCart
+                                                ? <Link to='/cart'>
+                                                    <button
+                                                        className='btn-go-to-cart'>xem giỏ hàng</button>
+                                                </Link>
+                                                : <button
+                                                    onClick={() => {
+                                                        value.handleAddToCart(id)
+                                                        value.handleOpenModal(id)
+                                                    }}
+                                                    className='btn-add-cart'>
+                                                    <i className='fas fa-cart-plus'><span className='ml-1'>thêm vào giỏ</span></i>
+                                                </button>
+                                        }
+                                    </div>
 
-            </h5>
-          </div>
-        </div>
-      </div>
-    )
-  }
+                                </div>
+                            </div>
+                        )
+                    }
+                }
+            </ProductConsumer >
+        )
+    }
 }
 
 Product.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number,
-    img: PropTypes.string,
-    title: PropTypes.string,
-    price: PropTypes.number,
-    inCart: PropTypes.bool
-  }).isRequired
+    product: PropTypes.shape({
+        id: PropTypes.number,
+        img: PropTypes.string,
+        title: PropTypes.string,
+        price: PropTypes.number,
+        inCart: PropTypes.bool
+    }).isRequired
 }
 
 export default Product;

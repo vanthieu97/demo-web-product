@@ -8,6 +8,8 @@ import Login from './users/Login'
 import Products from './Products'
 import Product from './Product'
 import Modal from './Modal'
+import Detail from './Detail'
+import Cart from './cart/Cart'
 
 export {
     Header,
@@ -19,5 +21,7 @@ export {
     Login,
     Products,
     Product,
-    Modal
+    Modal,
+    Detail,
+    Cart
 }

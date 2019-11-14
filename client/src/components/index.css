@@ -77,16 +77,19 @@
 
 .card {
     border-color: transparent;
-    transition: all 1s linear;
+    transition: all 0.25s linear;
 }
 
 .card-footer {
     background: transparent;
     border-top: transparent;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .card:hover {
-    border: 0.04rem solid rgba(0, 0, 0, 0.2);
+    /* border: 0.1rem solid #D2223B; */
+    border-color: #D2223B;
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -164,13 +167,13 @@
     background: var(--mainWhite);
 }
 
-.button-modal {
+
+.button-buy {
     text-transform: capitalize;
 font-size: 1.4rem;
 background: transparent;
 border: 0.05rem solid var(--lightBlue);
-/* border-color: var(--mainYellow); */
-/* color: var(--mainYellow); */
+color: var(--lightBlue);
 border-radius: 0.5rem;
 padding: 0.5rem 0.5rem;
 cursor: pointer;
@@ -178,10 +181,79 @@ margin: 0.2rem 0.5rem 0.2rem 0;
 transition: all 0.5s ease-in-out;
 }
 
-.button-modal:hover {
-    background: var(--mainYellow);
+.button-buy:hover {
+    background: var(--lightBlue);
+    color: white;
 }
 
-.button-modal:focus {
+.button-buy:focus {
     outline: none;
+}
+
+.button-cart {
+    text-transform: capitalize;
+font-size: 1.4rem;
+background: transparent;
+border: 0.05rem solid var(--mainYellow);
+color: var(--mainYellow);
+border-radius: 0.5rem;
+padding: 0.5rem 0.5rem;
+cursor: pointer;
+margin: 0.2rem 0.5rem 0.2rem 0;
+transition: all 0.5s ease-in-out;
+}
+
+.button-cart:hover {
+    background: var(--mainYellow);
+    color: white;
+}
+
+.button-cart:focus {
+    outline: none;
+}
+
+.btn-add-cart {
+    border: 1px solid #eee;
+    background: white;
+    margin: 5px 0 0 0;
+    padding: 7.5px 13px;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 5px;
+    color: #bbb;
+    text-transform: uppercase;
+}
+
+.btn-add-cart:hover {
+    background: #dd3333;
+    border: 1px solid #86bc42;
+    font-weight: 650;
+    color: white;
+}
+
+.btn-go-to-cart {
+    background: #dd3333;
+    border: 1px solid #86bc42;
+    font-size: 13px;
+    border-radius: 5px;
+    font-weight: 650;
+    margin: 5px 0 0 0;
+    padding: 7.5px 13px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.product-info {
+    position: absolute;
+    top: 0;
+    color: var(--lightBlue);
+    margin: 10px;
+    text-align: justify;
+    /* display: none; */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transform: translateX(calc(10px + 100%));
+}
+
+.img-container:hover > .product-info {
+    transform: translateX(0);
 }

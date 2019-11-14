@@ -20,24 +20,24 @@ export default class Modal extends Component {
                                 <div className='modal'>
                                     <div className='container'>
                                         <div className='row'>
-                                            <div id='modal' className='col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize'>
-                                                <h5>item added to the cart</h5>
-                                                <img src={img} className='img-fluid' alt='product' />
-                                                <h5>{title}</h5>
+                                            <div id='modal' className='col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalizep-5 p-3'>
+                                                <h5 className='pb-2 text-capitalize'>đã thêm vào giỏ hàng</h5>
+                                                <img src={img} className='img-fluid pb-3' alt='product' />
+                                                <h5 className='mb-0'>{title}</h5>
                                                 <h5 className='text-muted'>{price}đ</h5>
                                                 <Link to='/products'>
-                                                    <button className='button-modal' onClick={_ => {
+                                                    <button className='button-buy' onClick={_ => {
                                                         handleCloseModal()
                                                     }}>
-                                                        continue shopping
+                                                        mua tiếp
                                                     </button>
                                                 </Link>
                                                 <Link to='/cart'>
-                                                    <button className='button-modal'
+                                                    <button className='button-cart'
                                                         onClick={_ => {
                                                             handleCloseModal()
                                                         }}>
-                                                        go to cart
+                                                        xem giỏ hàng
                                                     </button>
                                                 </Link>
                                             </div>

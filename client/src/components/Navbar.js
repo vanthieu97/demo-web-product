@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css'
-// import Data from '../Data'
-// import { Button } from '.'
 
 class Navbar extends Component {
     render() {
@@ -68,9 +65,11 @@ class Navbar extends Component {
           </Button>
                 </Link> */}
                 </div>
-                <button className='shopping-cart'>
-                    <i className="fas fa-shopping-cart" />
-                </button>
+                <Link to='/cart'>
+                    <button className='shopping-cart'>
+                        <i className="fas fa-shopping-cart" />
+                    </button>
+                </Link>
             </nav>
         );
     }

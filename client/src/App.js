@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
-import { Home, Register, Login, Products } from './components'
+import { Home, Register, Login, Products, Detail, Cart } from './components'
 import { CoffeeAdmin } from './admin'
 
 function App() {
@@ -18,6 +18,8 @@ function App() {
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
         <Route path='/products' component={Products} />
+        <Route path='/detail' component={Detail} />
+        <Route path='/cart' component={Cart} />
 
         {/* <Route path='/cart' component={Cart} />
         <Route component={Default} /> */}

@@ -163,6 +163,7 @@ class ProductProvider extends Component {
     }
 
     render() {
+        console.log(this.state.cart)
         return (
             <ProductContext.Provider
                 value={{
