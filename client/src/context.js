@@ -20,7 +20,24 @@ class ProductProvider extends Component {
     }
 
     componentDidMount() {
+        window.addEventListener('beforeunload', this.onUnload)
+        let context = JSON.parse(localStorage.getItem('context'))
+        this.setState(context)
         this.setProducts()
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('beforeunload', this.onUnload)
+    }
+
+    onUnload = event => {
+        window.alert('ahihi')
+        this.saveData()
+    }
+
+    saveData() {
+        const { cart, cartTax, cartTotal, cartSubTotal } = this.state
+        localStorage.setItem('context', JSON.stringify({ cart, cartTax, cartTotal, cartSubTotal }))
     }
 
     setProducts = () => {
@@ -163,7 +180,6 @@ class ProductProvider extends Component {
     }
 
     render() {
-        console.log(this.state.cart)
         return (
             <ProductContext.Provider
                 value={{
