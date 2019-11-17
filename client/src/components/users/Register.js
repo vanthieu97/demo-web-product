@@ -6,6 +6,7 @@ import Popup from "reactjs-popup"
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { Header, Navbar, Footer } from '..'
+import { ProductContext } from '../../ProductContext'
 
 // facebook: https://developers.facebook.com/apps
 // google: https://console.developers.google.com/apis/credentials
@@ -78,7 +79,7 @@ class Register extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        axios.post(process.env.REACT_APP_PUBLIC_URL + 'users/register', account)
+        axios.post('http://localhost:5000/users/register', account)
             .then(res => {
                 if (res.data) {
                     if (res.data.error) {
@@ -92,21 +93,7 @@ class Register extends Component {
                             })
                         }, 1500);
                     } else {
-                        this.setState({
-                            popupRegister: true,
-                            popupContent: 'Register successfully!'
-                        })
-                        let account = res.data
-
-                        localStorage.setItem('username', account.username)
-                        localStorage.setItem('fullName', account.fullName)
-
-                        setTimeout(() => {
-                            this.setState({
-                                popupRegister: false
-                            })
-                            window.location = '/'
-                        }, 1000);
+                        this.handleLoginAccount()
                     }
                 }
             })
@@ -115,8 +102,56 @@ class Register extends Component {
             })
     }
 
-    responseFacebook(response) {
-        console.log(response)
+    handleLoginAccount() {
+        const account = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        const { history } = this.props
+        axios.post('http://localhost:5000/users/authenticate/', account)
+            .then(res => {
+                if (res.data) {
+                    if (res.data.error) {
+                        this.setState({
+                            popupLogin: true,
+                            popupContent: res.data.error
+                        })
+                        setTimeout(() => {
+                            this.setState({
+                                popupRegister: false
+                            })
+                        }, 1500);
+                    } else {
+                        this.setState({
+                            popupRegister: true,
+                            popupContent: 'Register successfully!'
+                        })
+
+                        localStorage.accessToken = res.data.accessToken
+                        localStorage.platform = 'self'
+                        const { handleChangeUser } = this.context
+                        handleChangeUser && handleChangeUser()
+
+                        setTimeout(() => {
+                            this.setState({
+                                popupRegister: false
+                            })
+                            history.goBack()
+                        }, 1000);
+                    }
+                }
+            })
+    }
+
+    responseFacebook = response => {
+        const { history } = this.props
+        if (response && response.status !== 'unknown') {
+            localStorage.accessToken = response.accessToken
+            localStorage.platform = 'facebook'
+            const { handleChangeUser } = this.context
+            handleChangeUser && handleChangeUser()
+            history.goBack()
+        }
     }
 
     responseGoogle(response) {
@@ -254,9 +289,9 @@ class Register extends Component {
                     <div>{this.state.popupContent}</div>
                 </Popup>
                 <Footer />
-            </div>
+            </div >
         );
     }
 }
-
+Register.contextType = ProductContext
 export default Register;

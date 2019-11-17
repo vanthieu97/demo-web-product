@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { stores } from './Store'
+import axios from 'axios'
 
 const ProductContext = React.createContext();
 
@@ -15,7 +16,8 @@ class ProductProvider extends Component {
             modalOpen: false,
             cartSubTotal: 0,
             cartTax: 0,
-            cartTotal: 0
+            cartTotal: 0,
+            user: {}
         }
     }
 
@@ -44,6 +46,7 @@ class ProductProvider extends Component {
         let tempProducts = []
         stores.forEach(item => {
             const singleItem = { ...item }
+            singleItem.inCart = false
             tempProducts = [...tempProducts, singleItem]
         })
         this.setState(() => {
@@ -74,6 +77,7 @@ class ProductProvider extends Component {
 
     handleDetail = (id) => {
         const product = this.getItem(id)
+        console.log(product)
         this.setState({
             details: product
         })
@@ -176,7 +180,64 @@ class ProductProvider extends Component {
         }, () => {
             this.addTotal()
         })
+    }
 
+    handleChangeUser = _ => {
+        const accessToken = localStorage.accessToken
+        const platform = localStorage.platform
+        if (accessToken) {
+            switch (platform) {
+                case 'facebook':
+                    this.getDataFromFacebook(accessToken)
+                    break
+                case 'google':
+                    console.log('google')
+                    break
+                default:
+                    this.getDataFromServer(accessToken)
+                    break
+            }
+        }
+    }
+
+    getDataFromFacebook(accessToken) {
+        return axios.get(`https://graph.facebook.com/v2.5/me?fields=email,name,id,picture&access_token=${accessToken}`)
+            .then(res => {
+                if (res.data) {
+                    let user = {
+                        fullName: res.data.name,
+                        email: res.data.email,
+                        id: res.data.id,
+                        avatar: res.data.picture.data.url
+                    }
+                    this.setState({
+                        user: user
+                    })
+                    return true
+                }
+                return false
+            })
+            .catch(err => {
+                return false
+            })
+    }
+
+    getDataFromServer(accessToken) {
+        axios.get('http://localhost:5000/users/current/', {
+            headers: {
+                'Content-Type': 'application/json', 'accessToken': accessToken
+            }
+        })
+            .then(res => {
+                if (res.data && !res.data.message) {
+                    this.setState({
+                        user: Object.assign(res.data)
+                    })
+                }
+            }
+            )
+            .catch((error) => {
+            })
     }
 
     render() {
@@ -191,7 +252,8 @@ class ProductProvider extends Component {
                     increment: this.increment,
                     decrement: this.decrement,
                     removeItem: this.removeItem,
-                    clearCart: this.clearCart
+                    clearCart: this.clearCart,
+                    handleChangeUser: this.handleChangeUser,
                 }}
             >
                 {this.props.children}
@@ -201,4 +263,4 @@ class ProductProvider extends Component {
 }
 
 const ProductConsumer = ProductContext.Consumer;
-export { ProductProvider, ProductConsumer }
+export { ProductProvider, ProductConsumer, ProductContext }

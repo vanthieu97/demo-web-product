@@ -7,6 +7,7 @@ import Popup from "reactjs-popup"
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { Header, Navbar, Footer } from '..'
+import { ProductContext } from '../../ProductContext'
 
 class Login extends Component {
     constructor(props) {
@@ -37,8 +38,15 @@ class Login extends Component {
         elementReset.style.display = 'none'
     }
 
-    responseFacebook(response) {
-        // console.log(response)
+    responseFacebook = response => {
+        const { history } = this.props
+        if (response && response.status !== 'unknown') {
+            localStorage.accessToken = response.accessToken
+            localStorage.platform = 'facebook'
+            const { handleChangeUser } = this.context
+            handleChangeUser && handleChangeUser()
+            history.goBack()
+        }
     }
 
     responseGoogle(response) {
@@ -60,10 +68,12 @@ class Login extends Component {
     handleLogin = event => {
         event.preventDefault()
         const { username, password } = this.state
+        const { history } = this.props
         let account = {
             username: username,
             password: password
         }
+
         axios.post('http://localhost:5000/users/authenticate/', account)
             .then(res => {
                 if (res.data) {
@@ -82,16 +92,16 @@ class Login extends Component {
                             popupLogin: true,
                             popupContent: 'Login successfully!'
                         })
-                        let account = res.data
 
-                        localStorage.setItem('username', account.username)
-                        localStorage.setItem('fullName', account.fullName)
-
+                        localStorage.accessToken = res.data.accessToken
+                        localStorage.platform = 'self'
+                        const { handleChangeUser } = this.context
+                        handleChangeUser && handleChangeUser()
                         setTimeout(() => {
                             this.setState({
                                 popupLogin: false
                             })
-                            window.location = '/'
+                            history.goBack()
                         }, 1000);
                     }
                 }
@@ -102,6 +112,7 @@ class Login extends Component {
     }
 
     render() {
+        console.log(process.env)
         return (
             <div>
                 <Header />
@@ -109,13 +120,9 @@ class Login extends Component {
                 <div className='card bg-light' id="logreg-forms">
                     <form className="form-signin" onSubmit={this.handleLogin}>
                         <h1 className="h3 mb-3 font-weight-normal" style={{ textAlign: 'center' }} > Sign in</h1>
-                        {/* <div className="social-login">
-                            <button className="btn facebook-btn social-btn" type="button"><span><i className="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                            <button className="btn google-btn social-btn" type="button"><span><i className="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
-                        </div> */}
                         <p>
                             <GoogleLogin
-                                clientId="AIzaSyCazUJ_yVyeasDYcM1l0pOJj_Y0nT7p_Rg" //CLIENTID NOT CREATED YET
+                                clientId="AIzaSyCazUJ_yVyeasDYcM1l0pOJj_Y0nT7p_Rg"
                                 autoLoad={false}
                                 render={_ => {
                                     return <a href="" className="btn btn-block btn-gmail"> <i className="fab fa-google"></i>   Sign In with Google</a>
@@ -176,5 +183,5 @@ class Login extends Component {
         )
     }
 }
-
+Login.contextType = ProductContext
 export default Login

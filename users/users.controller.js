@@ -1,4 +1,6 @@
 ﻿const express = require('express');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 const router = express.Router();
 const userService = require('./user.service');
 
@@ -32,8 +34,9 @@ function getAll(req, res, next) {
 }
 
 function getCurrent(req, res, next) {
-    userService.getById(req.user.sub)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
+    let accessToken = req.headers.accesstoken
+    userService.getCurrent(accessToken)
+        .then(user => user ? res.json(user) : res.json({ message: 'invalid token' }))
         .catch(err => next(err));
 }
 

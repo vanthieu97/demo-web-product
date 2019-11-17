@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { ProductConsumer } from '../context'
+import { ProductConsumer } from '../ProductContext'
 import { Link } from 'react-router-dom'
 
 class Detail extends Component {
     render() {
+        let pathname = this.props.location.pathname
+
         return (
             <ProductConsumer>
                 {
                     value => {
-                        const { id, company, img, info, price, title, inCart } = value.details
+                        let product
+                        if (pathname && Array.isArray(value.products) && value.products.length) {
+                            product = value.products.find(product => {
+                                return product.url === pathname.slice(1)
+                            })
+                        }
+                        if (!product) return null
+                        const { id, company, img, info, price, title, inCart } = product
                         return (
                             <div className='container py-5'>
                                 <div className='row'>

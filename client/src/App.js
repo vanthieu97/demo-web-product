@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 
 import { Home, Register, Login, Products, Detail, Cart } from './components'
 import { CoffeeAdmin } from './admin'
+import { stores } from './Store'
 
 function App() {
   return (
@@ -20,7 +21,11 @@ function App() {
         <Route path='/products' component={Products} />
         <Route path='/detail' component={Detail} />
         <Route path='/cart' component={Cart} />
-
+        {
+          stores.map(product => {
+            return <Route key={product.id} path={`/${product.url}`} component={Detail} />
+          })
+        }
         {/* <Route path='/cart' component={Cart} />
         <Route component={Default} /> */}
       </Switch>

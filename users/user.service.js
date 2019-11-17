@@ -1,4 +1,4 @@
-﻿const config = require('../config.json');
+﻿const config = require('../config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
@@ -6,6 +6,7 @@ const User = db.User;
 
 module.exports = {
     authenticate,
+    getCurrent,
     getAll,
     getById,
     create,
@@ -17,18 +18,29 @@ async function authenticate({ username, password }) {
     const user = await User.findOne({ username });
     if (user && bcrypt.compareSync(password, user.hash)) {
         const { hash, ...userWithoutHash } = user.toObject();
-        const token = jwt.sign({ sub: user.id }, config.secret);
+        const accessToken = jwt.sign(userWithoutHash, config.secret);
         return {
-            ...userWithoutHash,
-            token
+            accessToken
         };
-    }else{
+    } else {
         throw `Username or password is incorrect`;
     }
 }
 
 async function getAll() {
     return await User.find().select('-hash');
+}
+
+async function getCurrent(accessToken) {
+    if (accessToken) {
+        return jwt.verify(accessToken, config.secret, (err, decoded) => {
+            if (err) {
+                throw 'invalid token'
+            } else {
+                return decoded
+            }
+        });
+    }
 }
 
 async function getById(id) {

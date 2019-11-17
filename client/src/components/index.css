@@ -90,7 +90,7 @@
 .card:hover {
     /* border: 0.1rem solid #D2223B; */
     border-color: #D2223B;
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2); */
 }
 
 .card-footer:hover {

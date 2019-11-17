@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { ProductConsumer } from '../context'
+import { ProductConsumer } from '../ProductContext'
 
 class Product extends Component {
     render() {
-        const { id, title, img, price, inCart, info } = this.props.product
+        const { id, title, img, price, inCart, info, url } = this.props.product
         return (
             <ProductConsumer>
                 {
@@ -14,7 +14,7 @@ class Product extends Component {
                             <div className='mx-auto col-md-6 col-lg-4 my-3'>
                                 <div className='card'>
                                     <div className='img-container position-relative' onClick={() => value.handleDetail(id)}>
-                                        <Link to='/detail'>
+                                        <Link to={`/${url}`}>
                                             <img
                                                 src={img}
                                                 alt='product'

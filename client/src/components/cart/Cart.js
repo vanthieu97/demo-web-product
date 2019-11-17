@@ -3,7 +3,7 @@ import CartColumns from './CartColumns'
 import EmptyCart from './EmptyCart'
 import CartList from './CartList'
 import CartTotals from './CartTotals'
-import { ProductConsumer } from '../../context'
+import { ProductConsumer } from '../../ProductContext'
 import { Header, Navbar, Footer } from '..';
 
 class Cart extends Component {

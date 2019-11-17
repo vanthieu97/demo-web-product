@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Navbar, Footer } from '.'
-import { ProductConsumer } from '../context'
+import { ProductConsumer } from '../ProductContext'
 import { Product, Modal } from '.'
 
 class Products extends Component {
