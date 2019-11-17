@@ -6,8 +6,8 @@ class Footer extends Component {
         return (
             <footer className="page-footer font-small pt-4">
                 <div className="container-fluid text-center text-md-left">
-                    <Link className='navbar-brand nav-link link-logo' to='/' >
-                        <img src={'./assets/loading_logo.jpg'} alt='store' className='navbar-brand footer-logo' />
+                    <Link className='navbar-brand nav-link link-logo mx-0' to='/' >
+                        <img src={'./assets/logo.png'} alt='store' className='navbar-brand footer-logo' />
                     </Link>
                 </div>
 

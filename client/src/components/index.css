@@ -3,21 +3,23 @@
 }
 
 .logo {
-    width: 25%;
+    width: 40px;
 }
 
-.nav-link {
-    color: dimgray !important;
-    text-transform: uppercase;
-    font-size: 0.75em;
+.menu-item{
+    color: #7a7d85 !important;
+    text-transform: capitalize;
+    white-space: nowrap;
+    font-weight: 600;
+    text-decoration: none;
 }
 
-.nav-link:active {
-    color: red !important;
+.menu-item:hover {
+    color: #1fd0b6 !important;
 }
 
-.nav-link:hover {
-    color: #ff0000 !important;
+.menu-item-select {
+    color: #1fd0b6 !important;
 }
 
 .carousel-item {
@@ -65,14 +67,6 @@
     color: #ff0000 !important;
 }
 
-.username {
-    display: flex;
-    align-items: center;
-    color: #ffff00;
-    justify-content: flex-end;
-}
-
-
 /* product */
 
 .card {
@@ -115,7 +109,7 @@
     bottom: 0;
     right: 0;
     padding: 0.2rem 0.4rem;
-    background: var(--lightBlue);
+    background: var(--lightGreen);
     border: none;
     color: var(--mainWhite);
     font-size: 1.4rem;
@@ -129,7 +123,7 @@
 }
 
 .cart-btn:hover {
-    color: var(--mainBlue);
+    color: var(--mainGreen);
     cursor: pointer;
 }
 
@@ -139,18 +133,30 @@
 
 .shopping-cart {
     color: var(--mainWhite);
-    background: var(--lightBlue);
+    background: var(--mainWhite);
+    /* border-color: var(--lightBlue); */
     border-radius: 50%;
-    border: none;
+    border: solid 1px var(--lightGreen);
     width: 40px;
     height: 40px;
     position: relative;
 }
 
 .shopping-cart:hover {
-    background: var(--mainBlue);
+    background: var(--lightGreen);
 }
 
+.shopping-cart:focus {
+    background: var(--mainGreen);
+}
+
+.fa-shopping-cart {
+    color: var(--lightGreen);
+}
+
+.shopping-cart:hover .fa-shopping-cart {
+    color: var(--mainWhite);
+}
 .modal {
     position: fixed;
     top: 0;
@@ -256,4 +262,44 @@ transition: all 0.5s ease-in-out;
 
 .img-container:hover > .product-info {
     transform: translateX(0);
+}
+
+.btn-login, .btn-register, .text-social, .user-info {
+    color: var(--lightGreen);
+    padding: 0;
+    font-weight: 400;
+}
+
+.btn-login::after{
+    content: '';
+    border-left: solid 1px var(--lightGreen);
+    margin: 5px;
+    font-size: 12px;
+}
+
+.btn-login:hover, .btn-register:hover{
+    color: var(--mainYellow);
+}
+
+.seach-box {
+    width: 30vw !important;
+}
+
+.bottom-element{
+    border-bottom: solid 1px #eaeaea;
+}
+
+.user-info {
+    color: var(--lightGreen);
+}
+
+.facebook, .instagram {
+    width: 20px;
+    transform: translateY(-3px);
+}
+
+.nav-header {
+    position: sticky;
+    top: 0;
+    z-index: 11;
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import axios from 'axios'
@@ -74,7 +73,7 @@ class Login extends Component {
             password: password
         }
 
-        axios.post('https://floating-reef-17602.herokuapp.com/users/authenticate/', account)
+        axios.post(`${process.env.REACT_APP_PUBLIC_URL}/users/authenticate/`, account)
             .then(res => {
                 if (res.data) {
                     if (res.data.error) {

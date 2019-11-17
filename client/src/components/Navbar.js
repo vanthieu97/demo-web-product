@@ -1,75 +1,60 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Navbar extends Component {
     render() {
         return (
-            <nav className='navbar navbar-expand-sm navbar-dark bg-white px-sm-5 shadow-sm static-top'>
-                <div className="container">
-                    <Link className='navbar-brand nav-link' to='/' >
-                        <img src={'./assets/loading_logo.jpg'} alt='store' className='navbar-brand logo' />
-                        Loading
-                    </Link>
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <div className='menu-top  ml-auto'>
-                            <ul className='navbar-nav align-items-bottom'>
-                                <li className='nav-item ml-3'>
-                                    <Link to='/' className='nav-link'>
-                                        trang chủ
+            <nav className='navbar navbar-expand-sm navbar-dark bg-white shadow-sm nav-header'>
+                <div className='container-fluid d-flex py-2 justify-content-between'>
+                    <div className='nav-left d-flex justify-content-start'>
+                        <Link className='navbar-brand nav-link p-0' to='/' >
+                            <img src={'./assets/logo.png'} alt='store' className='navbar-brand logo' />
+                        </Link>
+
+                        <form className="form-inline my-2 my-lg-0">
+                            <input className="form-control mr-sm-1 seach-box" type="search" placeholder="Nhập tên sản phẩm" aria-label="Search" />
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div className='nav-right'>
+                        <div className="collapse navbar-collapse" id="navbarResponsive">
+                            <div className='menu-top ml-auto pr-2'>
+                                <ul className='navbar-nav align-items-bottom'>
+                                    <li className='nav-item ml-1 menu-item'>
+                                        <Link to='/' className='nav-link menu-item'>
+                                            trang chủ
                                     </Link>
-                                </li>
-                                <li className='nav-item ml-3'>
-                                    <Link to='/' className='nav-link'>
-                                        giới thiệu
+                                    </li>
+                                    <li className='nav-item ml-1'>
+                                        <Link to='/' className='nav-link menu-item'>
+                                            giới thiệu
                                     </Link>
-                                </li>
-                                <li className='nav-item ml-3'>
-                                    <Link to='/products' className='nav-link'>
-                                        sản phẩm
+                                    </li>
+                                    <li className='nav-item ml-1'>
+                                        <Link to='/products' className='nav-link menu-item'>
+                                            sản phẩm
                                     </Link>
-                                </li>
-                                <li className='nav-item ml-3'>
-                                    <Link to='/' className='nav-link'>
-                                        sứ mệnh
+                                    </li>
+                                    <li className='nav-item ml-1'>
+                                        <Link to='/' className='nav-link menu-item'>
+                                            sứ mệnh
                                     </Link>
-                                </li>
-                                <li className='nav-item ml-3'>
-                                    <Link to='/' className='nav-link'>
-                                        liên hệ
+                                    </li>
+                                    <li className='nav-item ml-1'>
+                                        <Link to='/' className='nav-link menu-item'>
+                                            liên hệ
                                     </Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className='social-network ml-3'>
-                            <ul className='navbar-nav align-items-bottom'>
-                                <li className='nav-item ml-1'>
-                                    <a href='https://www.facebook.com/vanthieu.nguyen.771' className='facebook'>
-                                        <img src='./assets/icons/facebook.webp' alt='facebook' />
-                                    </a>
-                                </li>
-                                <li className='nav-item ml-1'>
-                                    <a href='https://www.instagram.com/thieulatui/' className='instagram'>
-                                        <img src='./assets/icons/instagram.webp' alt='instagram' />
-                                    </a>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <Link to='/cart' className='pr-2'>
+                                <button className='shopping-cart'>
+                                    <i className="fas fa-shopping-cart" />
+                                </button>
+                            </Link>
                         </div>
                     </div>
-                    {/* <Link to='/cart' className='ml-auto'>
-                    <Button>
-                        <span className='mr-2'>
-                            <i className='fas fa-cart-plus' />
-                        </span>
-                        My Cart
-          </Button>
-                </Link> */}
                 </div>
-                <Link to='/cart'>
-                    <button className='shopping-cart'>
-                        <i className="fas fa-shopping-cart" />
-                    </button>
-                </Link>
             </nav>
         );
     }

@@ -16,35 +16,46 @@ class Header extends Component {
             <ProductConsumer>
                 {value => {
                     return (
-                        <nav className='navbar navbar-expand-sm navbar-dark px-sm-5 shadow-sm static-top bg-primary'>
-                            <div className="container">
-                                <div className="col-md-4">
-                                    left content
-                    </div>
+                        <nav className='navbar navbar-expand-sm navbar-dark shadow-sm bg-white p-0 bottom-element'>
+                            <div className="container-fluid">
+                                <div className='col-md-4 text-left py-1'>
+                                    <div className='social d-flex'>
+                                        <div className='text-social pr-1'>Kết nối</div>
+                                        <a href='https://www.facebook.com/vanthieu.nguyen.771' target='_blank' className='pr-1'>
+                                            {/* <i class="fab fa-facebook-f"></i> */}
+                                            <img src='./assets/icons/logo-facebook.svg' className='facebook' alt='facebook' />
+
+                                        </a>
+                                        <a href='https://www.instagram.com/thieulatui/' target='_blank' className='pr-1'>
+                                            {/* <i class="fab fa-instagram"></i> */}
+                                            <img src='./assets/icons/logo-instagram.png' className='instagram' alt='instagram' />
+                                        </a>
+                                    </div>
+                                </div>
                                 {
                                     value.user && value.user.fullName
-                                        ? <div className='col-md-4 text-right px-0'>
-                                            <div className="username">
+                                        ? <div className='col-md-4 text-right py-1'>
+                                            <div className="user-info">
                                                 Xin chào, {value.user.fullName}
-                                                <div className="text-warning font-italic logout" onClick={this.handleLogoutAccount}>(Đăng xuất)</div>
+                                                <span className="text-warning font-italic logout" onClick={this.handleLogoutAccount}>(Đăng xuất)</span>
                                             </div>
                                         </div>
-                                        : <div className='col-md-4 text-right px-0'>
+                                        : <div className='col-md-4 text-right py-1'>
                                             <Link to="/login">
-                                                <button type="button" className="btn btn-success z">Đăng Nhập</button>
+                                                <span className="btn-login">Đăng Nhập</span>
                                             </Link>
                                             <Link to="/register" >
-                                                <button type="button" className="btn btn-warning ml-1 text-white">Đăng Ký</button>
+                                                <span className="btn-register">Đăng Ký</span>
                                             </Link>
                                         </div>
                                 }
 
                             </div>
-                        </nav>
+                        </nav >
                     )
                 }
                 }
-            </ProductConsumer>
+            </ProductConsumer >
         );
     }
 }

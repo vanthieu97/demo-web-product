@@ -26,6 +26,7 @@ class ProductProvider extends Component {
         let context = JSON.parse(localStorage.getItem('context'))
         this.setState(context)
         this.setProducts()
+        this.handleChangeUser()
     }
 
     componentWillUnmount() {
@@ -201,7 +202,7 @@ class ProductProvider extends Component {
     }
 
     getDataFromFacebook(accessToken) {
-        return axios.get(`https://graph.facebook.com/v2.5/me?fields=email,name,id,picture&access_token=${accessToken}`)
+        return axios.get(`${process.env.REACT_APP_FACEBOOK_URL}&access_token=${accessToken}`)
             .then(res => {
                 if (res.data) {
                     let user = {
@@ -223,7 +224,7 @@ class ProductProvider extends Component {
     }
 
     getDataFromServer(accessToken) {
-        axios.get('http://localhost:5000/users/current/', {
+        axios.get(`${process.env.REACT_APP_PUBLIC_URL}/users/current/`, {
             headers: {
                 'Content-Type': 'application/json', 'accessToken': accessToken
             }
