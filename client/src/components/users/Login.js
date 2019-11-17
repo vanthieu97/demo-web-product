@@ -74,7 +74,7 @@ class Login extends Component {
             password: password
         }
 
-        axios.post('http://localhost:5000/users/authenticate/', account)
+        axios.post('https://floating-reef-17602.herokuapp.com/users/authenticate/', account)
             .then(res => {
                 if (res.data) {
                     if (res.data.error) {
@@ -112,7 +112,6 @@ class Login extends Component {
     }
 
     render() {
-        console.log(process.env)
         return (
             <div>
                 <Header />
