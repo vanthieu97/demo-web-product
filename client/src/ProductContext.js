@@ -232,7 +232,6 @@ class ProductProvider extends Component {
             }
         })
             .then(res => {
-                console.log(res)
                 if (res.data && !res.data.message) {
                     this.setState({
                         user: Object.assign(res.data)
