@@ -189,12 +189,14 @@ class ProductProvider extends Component {
         if (accessToken) {
             switch (platform) {
                 case 'facebook':
+                    console.log('facebook')
                     this.getDataFromFacebook(accessToken)
                     break
                 case 'google':
                     console.log('google')
                     break
                 default:
+                    console.log('self: ', accessToken)
                     this.getDataFromServer(accessToken)
                     break
             }
@@ -230,6 +232,7 @@ class ProductProvider extends Component {
             }
         })
             .then(res => {
+                console.log(process.env, res)
                 if (res.data && !res.data.message) {
                     this.setState({
                         user: Object.assign(res.data)

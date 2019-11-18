@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-//const uri = 'mongodb://localhost:27017'
 const uri = process.env.ATLAS_URI || 'mongodb+srv://vanthieu97:thieu1997@cluster0-nzbrz.gcp.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(uri, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;

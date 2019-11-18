@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Slider extends Component {
     render() {
         return (
-            <header>
+            <header className='container-fluid'>
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
