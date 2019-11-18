@@ -36,7 +36,7 @@ function getAll(req, res, next) {
 function getCurrent(req, res, next) {
     let accessToken = req.headers.accesstoken
     userService.getCurrent(accessToken)
-        .then(user => user ? res.json(user) : res.json({ message: 'invalid token' }))
+        .then(user => user ? res.json(user): user)// : res.json({ message: 'invalid token' }))
         .catch(err => next(err));
 }
 

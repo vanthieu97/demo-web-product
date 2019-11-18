@@ -223,16 +223,16 @@ class ProductProvider extends Component {
             .catch(err => {
                 return false
             })
-    }
+    }\
 
     getDataFromServer(accessToken) {
-        axios.get(`${process.env.REACT_APP_PUBLIC_URL}/users/current/`, {
+        axios.get(`${process.env.REACT_APP_PUBLIC_URL}/users/current`, {
             headers: {
                 'Content-Type': 'application/json', 'accessToken': accessToken
             }
         })
             .then(res => {
-                console.log(process.env, res)
+                console.log(res)
                 if (res.data && !res.data.message) {
                     this.setState({
                         user: Object.assign(res.data)
