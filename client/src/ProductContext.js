@@ -223,7 +223,7 @@ class ProductProvider extends Component {
             .catch(err => {
                 return false
             })
-    }\
+    }
 
     getDataFromServer(accessToken) {
         axios.get(`${process.env.REACT_APP_PUBLIC_URL}/users/current`, {
