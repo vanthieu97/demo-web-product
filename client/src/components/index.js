@@ -10,6 +10,7 @@ import Product from './Product'
 import Modal from './Modal'
 import Detail from './Detail'
 import Cart from './cart/Cart'
+import ProductLists from './ProductLists'
 
 export {
     Header,
@@ -23,5 +24,6 @@ export {
     Product,
     Modal,
     Detail,
-    Cart
+    Cart,
+    ProductLists
 }
